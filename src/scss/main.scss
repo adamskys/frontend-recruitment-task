@@ -4,6 +4,8 @@ html {
   font-family: 'Roboto', sans-serif;
   line-height: 1.2;
 
+/* RESETS */
+
 *, *:before, *:after {
   box-sizing: inherit;
 }
@@ -13,6 +15,8 @@ body, h1, h2, h3, h4, h5, h6, p, ol, ul {
   padding: 0;
   font-weight: normal;
 }
+
+/* MAIN STYLES */
 
 body {
   min-height: 100vh;
@@ -32,7 +36,7 @@ main {
     margin-top: 5%;
   }
 
-  section.img-description {
+  section.img-hero {
     display: flex;
     gap: 5%;
     flex-wrap: wrap;
@@ -62,8 +66,8 @@ main {
       font-weight: 300;
       color: #121212;
     }
-    .popup {  
-      width: 128px;
+    .button-popup {  
+      max-width: 128px;
       height: 48px;
       padding: 16px 40px;
       font-weight: 700;
@@ -71,22 +75,102 @@ main {
       background-color: #E4C1AE;
       border-radius: 32px;
       border: none;
-      transition: ease-in-out 0.2s;
+      transition: background-color ease-in-out 0.2s;
       cursor: pointer;
     }
 
-    .popup:hover {
+    .button-popup:hover {
       background-color: #c5a695;
     }
 
-    .popup:active {
-      transform: scale(0.90);
+    .button-popup:active {
+      transform: scale(0.95);
     }
-  }
-}
 }
 
-@media (max-width: 690px) {
+/* MODAL */
+.hidden {
+  display: none !important;
+}
+
+.popup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: rgba(18, 18, 18, 0.5);
+
+  .popup-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    max-width: 920px;
+    height: 210px;
+    padding: 56px 95px;
+    background: #fff;  
+  }
+
+  .popup-content {
+
+    h1 {
+      font-size: clamp(1.5rem, 3vw, 2.6rem);
+      font-weight: 700;
+      color:#121212;
+      margin-bottom: 10%;
+    }
+
+    p {
+      font-size: clamp(0.5rem, 2vw, 1rem);
+      line-height: 1.5;
+      font-weight: 300;
+      color: #121212;
+    }
+  }
+
+  .close-popup {
+    position: absolute;
+    top: 46px;
+    right: 46px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    background: none;
+    border: none;
+  }
+
+  .close-popup:active {
+    transform: scale(0.9);
+  }
+}
+
+/* Animations */
+/* Open */
+.popup {
+  animation: popup-open 0.3s;
+}
+@keyframes popup-open {
+  0%    { opacity: 0; }
+  100%  { opacity: 1; }
+}
+
+.popup-opened {
+  animation: popup-close 0.3s;
+}
+
+@keyframes popup-close {
+  0%    { opacity: 1; }
+  100%  { opacity: 0; }
+}
+
+}
+
+}
+
+@media (max-width: 705px) {
   .img-description {
     flex-direction: column;
   }
@@ -104,10 +188,11 @@ main {
   }
 }
 
-@media (max-width: 550px) {
-  .description {
-    .popup {
-      padding: 0;
-    }
+@media (max-width: 600px) {
+  .button-popup {  
+    width: 84px;
+    // used important as media qeuries were overwritten by standard styles, couldnt figure out why.
+    height: 30px !important;
+    padding: 5px !important;
   }
 }

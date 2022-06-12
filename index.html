@@ -14,7 +14,7 @@
 
 <body>
     <main>
-        <section class="img-description">
+        <section class="img-hero">
             <img src="images/sean-o-KMn4VEeEPR8-unsplash_1_s6zmfh_c_scale,w_1400.jpg"
                 alt=" Picture of sunset at the beach">
             <div class="description">
@@ -24,9 +24,19 @@
                     legacy
                     infrastructures and SaaS platforms, managed via a single app with no hardware required.
                 </p>
-                <button class="popup">Button</button>
+                <button class="button-popup">Button</button>
             </div>
         </section>
+
+        <div class="popup hidden">
+            <div class="popup-container">
+                <div class="popup-content">
+                    <h1>Alert!</h1>
+                    <p class="popup-paragraph"></p>
+                </div>
+                <button class="close-popup">&times;</button>
+            </div>
+        </div>
     </main>
     <script src="/dist/all.js"></script>
 </body>
