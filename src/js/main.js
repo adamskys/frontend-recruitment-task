@@ -12,19 +12,28 @@ const popupContainer = document.querySelector('.popup-container');
 const popupParagraph = document.querySelector('.popup-paragraph');
 const btnOpenPopup = document.querySelector('.button-popup');
 const btnClosePopup = document.querySelector('.close-popup');
+const btnResetCounter = document.querySelector('.reset-counter');
+let counter = localStorage.getItem('counter');
 
 let userClickCount = 0;
 
-/*--  Opening and closing modal + counting clicks  --*/
-btnOpenPopup.addEventListener('click', () => {
-  popup.classList.remove('hidden');
-  userClickCount += 1;
-  popupParagraph.textContent = `You have clicked ${userClickCount} times to related button.`;
-})
-
+/*--  Click event and counting clicks  --*/
 const closePopup = () => {
   popup.classList.add('hidden');
 }
+
+const openPopupAndCount = () => {
+  popup.classList.remove('hidden');
+  localStorage.setItem('counter', userClickCount += 1);
+  popupParagraph.textContent = `You have clicked ${userClickCount} times to related button.`;
+  if (userClickCount > 5) {
+    btnResetCounter.classList.remove('hidden');
+  }
+}
+
+btnOpenPopup.addEventListener('click', () => {
+  openPopupAndCount();
+});
 
 btnClosePopup.addEventListener('click', () => {closePopup()});
 
@@ -40,4 +49,10 @@ document.addEventListener('keydown', e => {
   }
 });
 
-/*--  Counting and storing clicks  --*/
+btnResetCounter.addEventListener('click', () => {
+  localStorage.setItem('counter', userClickCount = 0);
+  popupParagraph.textContent = `You have clicked ${userClickCount} times to related button.`;
+  btnResetCounter.classList.add('hidden');
+});
+
+
