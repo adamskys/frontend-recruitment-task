@@ -67,12 +67,14 @@ btnResetCounter.addEventListener('click', () => {
 // 4.
 const url = 'https://jsonplaceholder.typicode.com/users';
 
-fetch(url)
-  .then(res => {
-    return res.json();
-  })
-  .then(data => {
-    let users = data;
+async function fetchUsers() {
+  const response = await fetch(url);
+
+  if(!response.ok) {
+    const message = `An error has occured: ${response.status}`;
+    throw new Error(message);
+  }
+  const users = await response.json();
 
     users.map(user => {
       const tableContent = document.querySelector('.table-content')
@@ -83,11 +85,37 @@ fetch(url)
         <td>${user.phone}</td>
         <td>${user.company.name}</td>
       </tr>`
-
-      tableContent.insertAdjacentHTML('afterbegin', row);
-      // tableContent.innerHTML += row;
+    tableContent.insertAdjacentHTML('afterbegin', row);
     });
-  })
-  .catch(err => {
-    console.log(err);
-  });
+}
+fetchUsers().catch(err => {
+  err.message;
+});
+
+
+
+
+// fetch(url)
+//   .then(res => {
+//     return res.json();
+//   })
+//   .then(data => {
+//     const users = data;
+
+//     users.map(user => {
+//       const tableContent = document.querySelector('.table-content')
+//       let row = `<tr>
+//         <td>${user.name}</td>
+//         <td>${user.email}</td>
+//         <td>${user.address.city}, ${user.address.street}, ${user.address.suite}</td>
+//         <td>${user.phone}</td>
+//         <td>${user.company.name}</td>
+//       </tr>`
+
+//       tableContent.insertAdjacentHTML('afterbegin', row);
+//       // tableContent.innerHTML += row;
+//     });
+//   })
+//   .catch(err => {
+//     console.log(err);
+//   });
