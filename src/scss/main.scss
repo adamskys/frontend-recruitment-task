@@ -200,7 +200,7 @@ main {
       width: 35ch;
     }
   }
-
+    // used important as media qeuries were overwritten by standard styles, couldnt figure out why.
   .popup-container {
   height: 90% !important;
   }
@@ -210,16 +210,16 @@ main {
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 650px) {
   .button {  
     width: 84px;
-    // used important as media qeuries were overwritten by standard styles, couldnt figure out why.
+
     height: 36px !important;
     padding: 5px !important;
   }
 
   .popup-container {
-    height: 160px !important;
+    // height: 90% !important;
     padding: 18px 32px !important;
   }
 
@@ -229,6 +229,7 @@ main {
   }
 
   .button.reset-counter {
-    right: 26px !important; 
+    top: 60px !important;
+    // right: 100px !important; 
   }
 }
