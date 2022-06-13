@@ -87,14 +87,21 @@ main {
 
   .popup-container {
     display: flex;
-    align-items: center;
+    // align-items: center;
     position: relative;
     width: 100%;
-    max-width: 920px;
-    height: 210px;
+    max-width: 950px;
+    height: 610px;
     margin: 5%;
     padding: 56px 95px;
-    background: #fff;  
+    background: #fff;
+
+    table {
+      position: absolute;
+      bottom: 50px;
+      font-size: 0.8rem;
+      margin: 1%;
+    }
   }
 
   .popup-content {
@@ -152,8 +159,8 @@ main {
 
 .button.reset-counter {
   position: absolute;
-  bottom: 46px;
-  right: 46px;
+  top: 200px;
+  left: 80px;
 }
 
 /* Animations */
@@ -170,7 +177,14 @@ main {
 
 }
 
-@media (max-width: 705px) {
+@media (max-width: 1000px) {
+  .button.reset-counter {
+    top: 100px !important;
+    left: 400px !important;
+  }
+}
+
+@media (max-width: 765px) {
   .img-hero {
     flex-direction: column;
   }
@@ -185,6 +199,14 @@ main {
     p {
       width: 35ch;
     }
+  }
+
+  .popup-container {
+  height: 90% !important;
+  }
+
+  table {
+    font-size: 0.7rem !important;
   }
 }
 
