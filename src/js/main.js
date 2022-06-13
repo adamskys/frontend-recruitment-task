@@ -23,6 +23,10 @@ const closePopup = () => {
   popup.classList.add('hidden');
 }
 
+const counterParagraphInject = () => {
+  popupParagraph.innerHTML = `<p class="popup-paragraph">You have clicked <strong>${userClickCount} times</strong> to related button.</p>`;  
+}
+
 const openPopupAndCount = () => {
 
   popup.classList.remove('hidden');
@@ -30,7 +34,7 @@ const openPopupAndCount = () => {
   userClickCount = Number(localStorage.getItem(localStorageCounter));
   localStorage.setItem(localStorageCounter, userClickCount += 1);
   // popupParagraph.textContent = `You have clicked ${userClickCount} times to related button.`;
-  popupParagraph.innerHTML = `<p class="popup-paragraph">You have clicked <strong>${userClickCount} times</strong> to related button.</p>`;
+  counterParagraphInject();
   if (userClickCount > 5) {
     btnResetCounter.classList.remove('hidden');
   }
@@ -56,19 +60,19 @@ document.addEventListener('keydown', e => {
 
 btnResetCounter.addEventListener('click', () => {
   localStorage.setItem(localStorageCounter, userClickCount = 0);
-  popupParagraph.innerHTML = `<p class="popup-paragraph">You have clicked <strong>${userClickCount} times</strong> to related button.</p>`;  btnResetCounter.classList.add('hidden');
+  counterParagraphInject();
+  btnResetCounter.classList.add('hidden');
 });
 
 // 4.
 const url = 'https://jsonplaceholder.typicode.com/users';
 
 fetch(url)
-  .then(response => {
-    return response.json();
+  .then(res => {
+    return res.json();
   })
   .then(data => {
     let users = data;
-    console.log(users);
 
     users.map(user => {
       const tableContent = document.querySelector('.table-content')
@@ -82,5 +86,8 @@ fetch(url)
 
       tableContent.insertAdjacentHTML('afterbegin', row);
       // tableContent.innerHTML += row;
-    })
+    });
   })
+  .catch(err => {
+    console.log(err);
+  });
