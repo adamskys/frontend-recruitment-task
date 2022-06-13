@@ -17,17 +17,20 @@ const btnResetCounter = document.querySelector('.reset-counter');
 const localStorageCounter = 'counter';
 let userClickCount = 0;
 
+
 /*--  Click event and counting clicks  --*/
 const closePopup = () => {
   popup.classList.add('hidden');
 }
 
 const openPopupAndCount = () => {
+
   popup.classList.remove('hidden');
   // get value from storage
   userClickCount = Number(localStorage.getItem(localStorageCounter));
   localStorage.setItem(localStorageCounter, userClickCount += 1);
-  popupParagraph.textContent = `You have clicked ${userClickCount} times to related button.`;
+  // popupParagraph.textContent = `You have clicked ${userClickCount} times to related button.`;
+  popupParagraph.innerHTML = `<p class="popup-paragraph">You have clicked <strong>${userClickCount} times</strong> to related button.</p>`;
   if (userClickCount > 5) {
     btnResetCounter.classList.remove('hidden');
   }
@@ -53,8 +56,7 @@ document.addEventListener('keydown', e => {
 
 btnResetCounter.addEventListener('click', () => {
   localStorage.setItem(localStorageCounter, userClickCount = 0);
-  popupParagraph.textContent = `You have clicked ${userClickCount} times to related button.`;
-  btnResetCounter.classList.add('hidden');
+  popupParagraph.innerHTML = `<p class="popup-paragraph">You have clicked <strong>${userClickCount} times</strong> to related button.</p>`;  btnResetCounter.classList.add('hidden');
 });
 
 // 4.
@@ -69,7 +71,7 @@ fetch(url)
     console.log(users);
 
     users.map(user => {
-      const tableUsers = document.querySelector('.table-content')
+      const tableContent = document.querySelector('.table-content')
       let row = `<tr>
         <td>${user.name}</td>
         <td>${user.email}</td>
@@ -78,6 +80,7 @@ fetch(url)
         <td>${user.company.name}</td>
       </tr>`
 
-      tableUsers.insertAdjacentHTML('afterbegin', row);
+      tableContent.insertAdjacentHTML('afterbegin', row);
+      // tableContent.innerHTML += row;
     })
   })
