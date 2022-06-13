@@ -57,4 +57,27 @@ btnResetCounter.addEventListener('click', () => {
   btnResetCounter.classList.add('hidden');
 });
 
+// 4.
+const url = 'https://jsonplaceholder.typicode.com/users';
 
+fetch(url)
+  .then(response => {
+    return response.json();
+  })
+  .then(data => {
+    let users = data;
+    console.log(users);
+
+    users.map(user => {
+      const tableUsers = document.querySelector('.table-content')
+      let row = `<tr>
+        <td>${user.name}</td>
+        <td>${user.email}</td>
+        <td>${user.address.city}, ${user.address.street}, ${user.address.suite}</td>
+        <td>${user.phone}</td>
+        <td>${user.company.name}</td>
+      </tr>`
+
+      tableUsers.insertAdjacentHTML('afterbegin', row);
+    })
+  })
